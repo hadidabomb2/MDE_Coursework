@@ -1,3 +1,6 @@
+uk.ac.kcl.mde.gawk/bin/.gitignore
+uk.ac.kcl.mde.gawk/.classpath
+uk.ac.kcl.mde.gawk/.settings/org.eclipse.jdt.core.prefs
 uk.ac.kcl.mde.gawk.ide/bin/
 uk.ac.kcl.mde.gawk.ide/src-gen/
 uk.ac.kcl.mde.gawk.ide/src/
