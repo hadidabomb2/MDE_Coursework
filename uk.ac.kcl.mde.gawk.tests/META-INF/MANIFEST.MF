@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: uk.ac.kcl.mde.gawk.tests
+Bundle-ManifestVersion: 2
+Bundle-Name: uk.ac.kcl.mde.gawk.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: uk.ac.kcl.mde.gawk.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: uk.ac.kcl.mde.gawk,
+ org.junit.jupiter.api;bundle-version="[5.0.0,6.0.0)",
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: uk.ac.kcl.mde.gawk.tests;x-internal=true
