@@ -33,4 +33,10 @@ uk.ac.kcl.mde.gawk/src/uk/ac/kcl/mde/gawk/generator/
 uk.ac.kcl.mde.gawk/src/uk/ac/kcl/mde/gawk/scoping/
 uk.ac.kcl.mde.gawk/src/uk/ac/kcl/mde/gawk/validation/
 uk.ac.kcl.mde.gawk/xtend-gen/
-
+uk.ac.kcl.mde.gawk.ide/META-INF/MANIFEST.MF
+uk.ac.kcl.mde.gawk.tests/META-INF/MANIFEST.MF
+uk.ac.kcl.mde.gawk.ui.tests/META-INF/MANIFEST.MF
+uk.ac.kcl.mde.gawk.ui/META-INF/MANIFEST.MF
+uk.ac.kcl.mde.gawk/META-INF/MANIFEST.MF
+uk.ac.kcl.mde.gawk/build.properties
+uk.ac.kcl.mde.gawk/bin/uk/ac/kcl/mde/gawk/Gawk.xtext
