@@ -6,30 +6,52 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 GawkProgram:
 	filename = Filename
-	statements += Statement*
+	start = Section?
+	body = Section?
+	end = Section?
+;
+
+enum SectionHeader:
+	start | body | end
+;
+
+Section: 
+	section=SectionHeader "{"
+		statements+=Statement*
+	"}"
 ;
 
 Filename:
-	"Filename =" name=ID ".txt"
+	"Filename(" value=STRING ")"
 ;
 
 Statement:
-	PrintStatement |
-	VariableDeclaration
+	MatchStatement |
+	VariableDeclaration |
+	PrintStatement
+;
+
+MatchStatement:
+	'match' exp=MatchDeclaration
+;
+
+MatchDeclaration:
+	value=STRING | var=[VariableDeclaration]
 ;
 
 PrintStatement:
-	"print" columns+=ColumnDeclaration*	
+	{PrintStatement}
+	"print" (options+=PrintOptions)*
+;
+
+PrintOptions:
+	value=STRING | col=ColumnDeclaration | var=[VariableDeclaration]
 ;
 
 ColumnDeclaration:
-	columnIndex=INT separator+=SeparatorDeclaration
-;
-
-SeparatorDeclaration:
-	value=STRING
+	columnIndex=INT
 ;
 
 VariableDeclaration:
-	"var" name=ID "=" value=INT
+	"var" name=ID " = " value=INT
 ;
