@@ -22,7 +22,7 @@ Section:
 ;
 
 Filename:
-	"Filename(" value=STRING ")"
+	"Filename(" StringOption ")"
 ;
 
 Statement:
@@ -32,26 +32,46 @@ Statement:
 ;
 
 MatchStatement:
-	'match' exp=MatchDeclaration
+	'match' exp=MatchDeclaration ';'
 ;
 
 MatchDeclaration:
-	value=STRING | var=[VariableDeclaration]
+	StringOption | VarOption
 ;
 
 PrintStatement:
 	{PrintStatement}
-	"print" (options+=PrintOptions)*
+	'print' (options+=PrintOptions)* ';'
 ;
 
 PrintOptions:
-	value=STRING | col=ColumnDeclaration | var=[VariableDeclaration]
+	StringOption | ColOption | VarOption
+;
+
+IntOption:
+	val=INT
+;
+
+StringOption:
+	val=STRING
+;
+
+ColOption:
+	val=ColumnDeclaration
+;
+
+VarOption:
+	val=[VariableDeclaration]
 ;
 
 ColumnDeclaration:
 	columnIndex=INT
 ;
 
+VariableOptions:
+	StringOption | IntOption
+;
+
 VariableDeclaration:
-	"var" name=ID " = " value=INT
+	"var" name=ID " = " value=VariableOptions ';'
 ;
