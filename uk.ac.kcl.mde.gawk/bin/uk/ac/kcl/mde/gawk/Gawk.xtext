@@ -1,0 +1,9 @@
+grammar uk.ac.kcl.mde.gawk.Gawk with org.eclipse.xtext.common.Terminals
+
+generate gawk "http://www.ac.uk/kcl/mde/gawk/Gawk"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
