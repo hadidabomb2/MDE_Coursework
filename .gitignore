@@ -1,3 +1,9 @@
+uk.ac.kcl.mde.gawk.ide/xtend-gen/uk/ac/kcl/mde/gawk/ide/.gitignore
+uk.ac.kcl.mde.gawk.ui/xtend-gen/uk/ac/kcl/mde/gawk/ui/.gitignore
+uk.ac.kcl.mde.gawk.ui/xtend-gen/uk/ac/kcl/mde/gawk/ui/contentassist/.gitignore
+uk.ac.kcl.mde.gawk.ui/xtend-gen/uk/ac/kcl/mde/gawk/ui/labeling/.gitignore
+uk.ac.kcl.mde.gawk.ui/xtend-gen/uk/ac/kcl/mde/gawk/ui/outline/.gitignore
+uk.ac.kcl.mde.gawk.ui/xtend-gen/uk/ac/kcl/mde/gawk/ui/quickfix/.gitignore
 uk.ac.kcl.mde.gawk/bin/.gitignore
 uk.ac.kcl.mde.gawk/.settings/org.eclipse.jdt.core.prefs
 uk.ac.kcl.mde.gawk.ide/bin/
