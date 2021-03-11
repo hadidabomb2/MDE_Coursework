@@ -38,12 +38,22 @@ class GawkGenerator extends AbstractGenerator {
 	
 	def String doGenerateProgram(GawkProgram program) '''
 		//YOUR AWK PROGRAM
-		awk 'BEGIN {«program.sections.generateSections(SectionHeader.START)»} «program.sections.generateSections(SectionHeader.BODY)» END {«program.sections.generateSections(SectionHeader.END)»}' «program.filename.file.generateAwkMatchExp»
+		awk '«program.sections.generateSections(SectionHeader.START)»«program.sections.generateSections(SectionHeader.BODY)»«program.sections.generateSections(SectionHeader.END)»' «program.filename.file.generateAwkMatchExp»
 	'''
 	
 	def generateSections(EList<Section> sections, SectionHeader headerType) {
-		sections.filter[sectionBlock | sectionBlock.section == headerType]
-				.map[start | start.statements.generateAwkCommandsForSection].join(' ')
+		val sectionIterable = sections.filter[sectionBlock | sectionBlock.section == headerType]
+		sectionIterable.map[section | 
+			if (section.statements.length > 0) {
+				if (headerType == SectionHeader.START) {
+					'''BEGIN {«section.statements.generateAwkCommandsForSection»}'''	
+				} else if (headerType == SectionHeader.BODY) {
+					'''«section.statements.generateAwkCommandsForSection»'''
+				} else {
+					'''END {«section.statements.generateAwkCommandsForSection»}'''
+				}
+			}
+		].join(' ')
 	}
 	
 	def generateAwkCommandsForSection(EList<Statement> stmts) {
@@ -57,7 +67,7 @@ class GawkGenerator extends AbstractGenerator {
 	
 	dispatch def generateAwkPrintOption(PrintOptions opt) ''''''
 	dispatch def generateAwkPrintOption(StringOption opt) '''"«opt.^val»"'''
-	dispatch def generateAwkPrintOption(ColOption opt) '''«opt.^val»'''
+	dispatch def generateAwkPrintOption(ColOption opt) '''$«opt.^val.columnIndex»'''
 	dispatch def generateAwkPrintOption(VarReference opt) '''«opt.^val.generateAwkVarDeclaration»'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
@@ -68,6 +78,6 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkVariableOptions(StringOption decl) '''"«decl.^val»"'''
 	dispatch def generateAwkVariableOptions(IntOption decl) '''«decl.^val»'''
 	
-	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.name»'''
+	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.^val.generateAwkVariableOptions»'''
 
 }
