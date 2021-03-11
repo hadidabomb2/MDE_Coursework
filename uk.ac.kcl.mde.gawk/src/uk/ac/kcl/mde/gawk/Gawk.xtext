@@ -20,7 +20,7 @@ Section:
 ;
 
 Filename:
-	"Filename(" StringOption ")"
+	"Filename(" file=StringOption ")"
 ;
 
 Statement:

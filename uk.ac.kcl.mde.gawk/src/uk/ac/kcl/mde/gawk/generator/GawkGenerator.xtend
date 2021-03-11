@@ -21,6 +21,7 @@ import uk.ac.kcl.mde.gawk.gawk.VarReference
 import uk.ac.kcl.mde.gawk.gawk.MatchDeclaration
 import uk.ac.kcl.mde.gawk.gawk.IntOption
 import uk.ac.kcl.mde.gawk.gawk.VariableOptions
+import uk.ac.kcl.mde.gawk.gawk.Section
 
 /**
  * Generates code from your model files on save.
@@ -37,8 +38,13 @@ class GawkGenerator extends AbstractGenerator {
 	
 	def String doGenerateProgram(GawkProgram program) '''
 		//YOUR AWK PROGRAM
-		'BEGIN {«program.sections.filter[sectionBlock | sectionBlock.section == SectionHeader.START].map[start | start.statements.generateAwkCommandsForSection].join(' ')»}'
+		awk 'BEGIN {«program.sections.generateSections(SectionHeader.START)»} «program.sections.generateSections(SectionHeader.BODY)» END {«program.sections.generateSections(SectionHeader.END)»}' «program.filename.file.generateAwkMatchExp»
 	'''
+	
+	def generateSections(EList<Section> sections, SectionHeader headerType) {
+		sections.filter[sectionBlock | sectionBlock.section == headerType]
+				.map[start | start.statements.generateAwkCommandsForSection].join(' ')
+	}
 	
 	def generateAwkCommandsForSection(EList<Statement> stmts) {
 		'''«stmts.map[generateAwkCommand].join(' ')»'''
@@ -54,14 +60,14 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkPrintOption(ColOption opt) '''«opt.^val»'''
 	dispatch def generateAwkPrintOption(VarReference opt) '''«opt.^val.generateAwkVarDeclaration»'''
 	
-	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.name»'''
-	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
-	dispatch def generateAwkMatchExp(StringOption decl) '''"«decl.^val»"'''
+	dispatch def generateAwkMatchExp(StringOption decl) '''«decl.^val»'''
 	dispatch def generateAwkMatchExp(VarReference decl) '''«decl.^val.generateAwkVarDeclaration»'''
 	
 	dispatch def generateAwkVariableOptions(VariableOptions decl) ''''''
 	dispatch def generateAwkVariableOptions(StringOption decl) '''"«decl.^val»"'''
 	dispatch def generateAwkVariableOptions(IntOption decl) '''«decl.^val»'''
+	
+	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.name»'''
 
 }
