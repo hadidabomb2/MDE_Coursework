@@ -20,7 +20,7 @@ Section:
 ;
 
 Filename:
-	"Filename(" StringOption ")"
+	"Filename(" file=StringOption ")"
 ;
 
 Statement:
@@ -32,6 +32,7 @@ Statement:
 MatchStatement:
 	'match' exp=MatchDeclaration ';'
 ;
+
 
 MatchDeclaration:
 	StringOption | VarReference
@@ -63,7 +64,7 @@ VarReference:
 ;
 
 ColumnDeclaration:
-	columnIndex=INT
+	'column' columnIndex=INT
 ;
 
 VariableOptions:
@@ -71,5 +72,5 @@ VariableOptions:
 ;
 
 VariableDeclaration:
-	"var" name=ID " = " val=VariableOptions ';'
+	'var' name=ID ' = ' val=VariableOptions ';'
 ;

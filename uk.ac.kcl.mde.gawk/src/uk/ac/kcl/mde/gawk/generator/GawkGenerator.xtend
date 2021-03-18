@@ -37,7 +37,6 @@ class GawkGenerator extends AbstractGenerator {
 	}
 	
 	def String doGenerateProgram(GawkProgram program) '''
-		//YOUR AWK PROGRAM
 		awk '«program.sections.generateSections(SectionHeader.START)»«program.sections.generateSections(SectionHeader.BODY)»«program.sections.generateSections(SectionHeader.END)»' «program.filename.file.generateAwkMatchExp»
 	'''
 	
