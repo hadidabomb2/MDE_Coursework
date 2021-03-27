@@ -44,7 +44,7 @@ PrintStatement:
 ;
 
 PrintOptions:
-	StringOption | ColOption | VarReference
+	StringOption | ColOption | VarReference | Addition
 ;
 
 IntOption:
@@ -72,5 +72,21 @@ VariableOptions:
 ;
 
 VariableDeclaration:
-	'var' name=ID ' = ' val=VariableOptions ';'
+	'var' name=ID '=' val=VariableOptions ';'
 ;
+
+Addition returns Expression:
+	Multiplication ({Addition.left = current} operator+=("+"|"-") right+=Multiplication)*
+;
+
+Multiplication returns Expression:
+	Primary ({Multiplication.left = current} operator+=("*"|"/") right+=Primary)*
+;
+
+Primary returns Expression:
+	IntOption |
+	ColOption |
+	VarReference |
+	"(" Addition ")"
+;
+

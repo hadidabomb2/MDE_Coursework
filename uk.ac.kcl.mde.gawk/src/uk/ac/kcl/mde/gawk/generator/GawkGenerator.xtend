@@ -22,6 +22,9 @@ import uk.ac.kcl.mde.gawk.gawk.MatchDeclaration
 import uk.ac.kcl.mde.gawk.gawk.IntOption
 import uk.ac.kcl.mde.gawk.gawk.VariableOptions
 import uk.ac.kcl.mde.gawk.gawk.Section
+import uk.ac.kcl.mde.gawk.gawk.Addition
+import uk.ac.kcl.mde.gawk.gawk.Expression
+import uk.ac.kcl.mde.gawk.gawk.Multiplication
 
 /**
  * Generates code from your model files on save.
@@ -68,6 +71,7 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkPrintOption(StringOption opt) '''"«opt.^val»"'''
 	dispatch def generateAwkPrintOption(ColOption opt) '''$«opt.^val.columnIndex»'''
 	dispatch def generateAwkPrintOption(VarReference opt) '''«opt.^val.generateAwkVarDeclaration»'''
+	dispatch def generateAwkPrintOption(Addition opt) '''«opt.generateAwkExpression»'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
 	dispatch def generateAwkMatchExp(StringOption decl) '''«decl.^val»'''
@@ -78,5 +82,14 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkVariableOptions(IntOption decl) '''«decl.^val»'''
 	
 	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.^val.generateAwkVariableOptions»'''
-
+	
+	dispatch def generateAwkExpression(Expression exp) {}
+	dispatch def String generateAwkExpression(Addition exp) '''
+		(«exp.left.generateAwkExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateAwkExpression»«ENDFOR»)'''
+	dispatch def String generateAwkExpression(Multiplication exp) '''
+		«exp.left.generateAwkExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateAwkExpression»«ENDFOR»'''
+	dispatch def generateAwkExpression(IntOption exp) '''«exp.^val»'''
+	dispatch def generateAwkExpression(ColOption exp) '''$«exp.^val.columnIndex»'''
+	dispatch def generateAwkExpression(VarReference exp) '''«exp.^val.generateAwkVarDeclaration»'''
+	
 }
