@@ -38,13 +38,19 @@ MatchDeclaration:
 	StringOption | VarReference
 ;
 
+//PrintStatement:
+//	{PrintStatement}
+//	'print' (options+=PrintOptions)* ';'
+//;
+
 PrintStatement:
 	{PrintStatement}
-	'print' (options+=PrintOptions)* ';'
+	'print' val=Addition ';'
 ;
 
+
 PrintOptions:
-	StringOption | ColOption | VarReference | Addition
+	StringOption | Addition
 ;
 
 IntOption:
@@ -84,9 +90,9 @@ Multiplication returns Expression:
 ;
 
 Primary returns Expression:
+	StringOption |
 	IntOption |
-	ColOption |
+ 	ColOption |
 	VarReference |
-	"(" Addition ")"
+	"(" Multiplication ")"
 ;
-

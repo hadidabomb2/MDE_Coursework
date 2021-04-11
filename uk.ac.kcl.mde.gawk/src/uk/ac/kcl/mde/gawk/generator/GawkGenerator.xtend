@@ -65,12 +65,9 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkCommand(Statement stmt) ''''''
 	dispatch def generateAwkCommand(MatchStatement stmt) '''/«stmt.exp.generateAwkMatchExp»/'''
 	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
-	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.options.map[generateAwkPrintOption].join(' ')»}'''
+	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.^val.generateAwkExpression»}'''
 	
 	dispatch def generateAwkPrintOption(PrintOptions opt) ''''''
-	dispatch def generateAwkPrintOption(StringOption opt) '''"«opt.^val»"'''
-	dispatch def generateAwkPrintOption(ColOption opt) '''$«opt.^val.columnIndex»'''
-	dispatch def generateAwkPrintOption(VarReference opt) '''«opt.^val.generateAwkVarDeclaration»'''
 	dispatch def generateAwkPrintOption(Addition opt) '''«opt.generateAwkExpression»'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
@@ -83,11 +80,12 @@ class GawkGenerator extends AbstractGenerator {
 	
 	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.^val.generateAwkVariableOptions»'''
 	
-	dispatch def generateAwkExpression(Expression exp) {}
+	dispatch def generateAwkExpression(Expression exp) ''''''
 	dispatch def String generateAwkExpression(Addition exp) '''
 		(«exp.left.generateAwkExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateAwkExpression»«ENDFOR»)'''
 	dispatch def String generateAwkExpression(Multiplication exp) '''
 		«exp.left.generateAwkExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateAwkExpression»«ENDFOR»'''
+	dispatch def generateAwkExpression(StringOption exp) '''"«exp.^val»"'''
 	dispatch def generateAwkExpression(IntOption exp) '''«exp.^val»'''
 	dispatch def generateAwkExpression(ColOption exp) '''$«exp.^val.columnIndex»'''
 	dispatch def generateAwkExpression(VarReference exp) '''«exp.^val.generateAwkVarDeclaration»'''
