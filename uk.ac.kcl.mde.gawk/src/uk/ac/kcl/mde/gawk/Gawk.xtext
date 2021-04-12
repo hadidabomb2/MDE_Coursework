@@ -13,7 +13,7 @@ enum SectionHeader:
 	start | body | end
 ;
 
-Section: 
+Section:
 	section=SectionHeader "{"
 		statements+=Statement*
 	"}"
@@ -33,24 +33,13 @@ MatchStatement:
 	'match' exp=MatchDeclaration ';'
 ;
 
-
 MatchDeclaration:
 	StringOption | VarReference
 ;
 
-//PrintStatement:
-//	{PrintStatement}
-//	'print' (options+=PrintOptions)* ';'
-//;
-
 PrintStatement:
 	{PrintStatement}
 	'print' val=Addition ';'
-;
-
-
-PrintOptions:
-	StringOption | Addition
 ;
 
 IntOption:

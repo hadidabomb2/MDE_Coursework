@@ -14,7 +14,6 @@ import uk.ac.kcl.mde.gawk.gawk.MatchStatement
 import uk.ac.kcl.mde.gawk.gawk.VariableDeclaration
 import uk.ac.kcl.mde.gawk.gawk.PrintStatement
 import org.eclipse.emf.common.util.EList
-import uk.ac.kcl.mde.gawk.gawk.PrintOptions
 import uk.ac.kcl.mde.gawk.gawk.StringOption
 import uk.ac.kcl.mde.gawk.gawk.ColOption
 import uk.ac.kcl.mde.gawk.gawk.VarReference
@@ -66,9 +65,6 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkCommand(MatchStatement stmt) '''/«stmt.exp.generateAwkMatchExp»/'''
 	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
 	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.^val.generateAwkExpression»}'''
-	
-	dispatch def generateAwkPrintOption(PrintOptions opt) ''''''
-	dispatch def generateAwkPrintOption(Addition opt) '''«opt.generateAwkExpression»'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
 	dispatch def generateAwkMatchExp(StringOption decl) '''«decl.^val»'''
