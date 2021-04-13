@@ -24,6 +24,9 @@ import uk.ac.kcl.mde.gawk.gawk.Section
 import uk.ac.kcl.mde.gawk.gawk.Addition
 import uk.ac.kcl.mde.gawk.gawk.Expression
 import uk.ac.kcl.mde.gawk.gawk.Multiplication
+import uk.ac.kcl.mde.gawk.gawk.PrintColumns
+import uk.ac.kcl.mde.gawk.gawk.RowStatement
+import uk.ac.kcl.mde.gawk.gawk.ColStatement
 
 /**
  * Generates code from your model files on save.
@@ -64,7 +67,8 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkCommand(Statement stmt) ''''''
 	dispatch def generateAwkCommand(MatchStatement stmt) '''/«stmt.exp.generateAwkMatchExp»/'''
 	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
-	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.^val.generateAwkExpression»}'''
+	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.printCols.map[generateAwkPrintColumns].join(' ')»}'''
+	dispatch def generateAwkCommand(RowStatement stmt) '''{print «stmt.statements.map[generateAwkColStatement].join(' ')»}'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
 	dispatch def generateAwkMatchExp(StringOption decl) '''«decl.^val»'''
@@ -75,6 +79,14 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkVariableOptions(IntOption decl) '''«decl.^val»'''
 	
 	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.^val.generateAwkVariableOptions»'''
+	
+	def generateAwkColStatement(ColStatement stmt) '''«stmt.col.generateAwkPrintColumns» "«stmt.divider»"'''
+	
+	dispatch def generateAwkPrintColumns(PrintColumns exp) ''''''
+	dispatch def generateAwkPrintColumns(StringOption exp) '''"«exp.^val»"'''
+	dispatch def generateAwkPrintColumns(IntOption exp) '''«exp.^val»'''
+	dispatch def generateAwkPrintColumns(ColOption exp) '''$«exp.^val.columnIndex»'''
+	dispatch def generateAwkPrintColumns(VarReference exp) '''«exp.^val.generateAwkVarDeclaration»'''
 	
 	dispatch def generateAwkExpression(Expression exp) ''''''
 	dispatch def String generateAwkExpression(Addition exp) '''
