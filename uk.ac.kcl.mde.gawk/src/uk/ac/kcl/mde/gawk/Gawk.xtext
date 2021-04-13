@@ -39,7 +39,7 @@ MatchDeclaration:
 
 PrintStatement:
 	{PrintStatement}
-	'print' val=Addition ';'
+	'print' option=Addition ';'
 ;
 
 IntOption:

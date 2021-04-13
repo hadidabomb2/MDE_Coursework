@@ -64,7 +64,7 @@ class GawkGenerator extends AbstractGenerator {
 	dispatch def generateAwkCommand(Statement stmt) ''''''
 	dispatch def generateAwkCommand(MatchStatement stmt) '''/«stmt.exp.generateAwkMatchExp»/'''
 	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
-	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.^val.generateAwkExpression»}'''
+	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.option.generateAwkExpression»}'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
 	dispatch def generateAwkMatchExp(StringOption decl) '''«decl.^val»'''
