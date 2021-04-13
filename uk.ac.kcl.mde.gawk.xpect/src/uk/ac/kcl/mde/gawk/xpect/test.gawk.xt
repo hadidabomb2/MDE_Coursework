@@ -1,0 +1,55 @@
+/* XPECT_SETUP uk.ac.kcl.mde.gawk.xpect.XPectTests  END_SETUP */
+
+/*
+XPECT generated file text.turtles.xt.txt ---
+Program contains:
+
+- 2 turn commands
+- 2 move commands
+- 1 top-level loops
+- 2 variable declarations
+---
+
+XPECT generated file TextTurtle.java ---
+import uk.ac.kcl.inf.szschaler.turtles.library.*;
+
+public class TextTurtle {
+
+	public static void main (String[] args) {
+		TurtlesFrame tf = new TurtlesFrame();
+		
+		Turtle t = new Turtle(tf) {
+			@Override
+			public void run() {
+				for (int i0 = 0; i0 < 91; i0++) {
+					moveForward(10);
+					rotate(-90.0f);
+					moveBackward(10);
+					rotate(20.0f);					
+				}
+			}
+		};
+		
+		t.run();
+	}
+}
+---
+*/
+
+Filename("Trees123")
+start{
+	//XPECT scope at rowCount --> !max, !columnCount, rowCount, ... 
+	var rowCount = 5;
+}
+body{
+	//XPECT scope at columnCount --> !max, columnCount, rowCount, ... 
+	var columnCount = 10;
+	
+}
+end{
+	//XPECT scope at max --> max, columnCount, rowCount, ... 
+	var max = 2;
+}
+
+
+
