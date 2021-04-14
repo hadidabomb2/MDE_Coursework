@@ -20,13 +20,14 @@ Section:
 ;
 
 Filename:
-	"Filename(" file=StringOption ")"
+	"filename(" file=StringOption ")"
 ;
 
 Statement:
 	MatchStatement |
 	VariableDeclaration |
-	PrintStatement
+	PrintStatement |
+	RowStatement
 ;
 
 VariableDeclaration:
@@ -43,7 +44,22 @@ MatchDeclaration:
 
 PrintStatement:
 	{PrintStatement}
-	'print' option=Addition ';'
+	'print' option=PrintColumns ';'
+;
+
+RowStatement:
+	{RowStatement} 
+	'row' '{'
+		statements+=ColStatement*
+	'}'
+;
+
+ColStatement:
+	col=PrintColumns ',' divider=STRING ';' 
+;
+
+PrintColumns:
+	IntOption | StringOption | ColOption | VarReference
 ;
 
 IntOption:

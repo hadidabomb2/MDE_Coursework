@@ -24,6 +24,9 @@ import uk.ac.kcl.mde.awk.awk.Section
 import uk.ac.kcl.mde.awk.awk.Addition
 import uk.ac.kcl.mde.awk.awk.Expression
 import uk.ac.kcl.mde.awk.awk.Multiplication
+import uk.ac.kcl.mde.awk.awk.PrintColumns
+import uk.ac.kcl.mde.awk.awk.ColStatement
+import uk.ac.kcl.mde.awk.awk.RowStatement
 
 /**
  * Generates code from your model files on save.
@@ -64,7 +67,8 @@ class AwkGenerator extends AbstractGenerator {
 	dispatch def generateAwkCommand(Statement stmt) ''''''
 	dispatch def generateAwkCommand(MatchStatement stmt) '''/«stmt.exp.generateAwkMatchExp»/'''
 	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
-	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.option.generateAwkExpression»}'''
+	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.option.generateAwkPrintColumns»}'''
+	dispatch def generateAwkCommand(RowStatement stmt) '''{print «stmt.statements.map[generateAwkColStatement].join(' ')»}'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
 	dispatch def generateAwkMatchExp(StringOption decl) '''«decl.^val»'''
@@ -75,6 +79,14 @@ class AwkGenerator extends AbstractGenerator {
 	dispatch def generateAwkVariableOptions(IntOption decl) '''«decl.^val»'''
 	
 	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.^val.generateAwkVariableOptions»'''
+	
+	def generateAwkColStatement(ColStatement stmt) '''«stmt.col.generateAwkPrintColumns» "«stmt.divider»"'''
+	
+	dispatch def generateAwkPrintColumns(PrintColumns exp) ''''''
+	dispatch def generateAwkPrintColumns(StringOption exp) '''"«exp.^val»"'''
+	dispatch def generateAwkPrintColumns(IntOption exp) '''«exp.^val»'''
+	dispatch def generateAwkPrintColumns(ColOption exp) '''$«exp.^val.columnIndex»'''
+	dispatch def generateAwkPrintColumns(VarReference exp) '''«exp.^val.generateAwkVarDeclaration»'''
 	
 	dispatch def generateAwkExpression(Expression exp) ''''''
 	dispatch def String generateAwkExpression(Addition exp) '''
