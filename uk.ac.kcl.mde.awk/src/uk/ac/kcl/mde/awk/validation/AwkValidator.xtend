@@ -12,6 +12,8 @@ import uk.ac.kcl.mde.awk.awk.MatchStatement
 import uk.ac.kcl.mde.awk.awk.impl.MatchStatementImpl
 import java.util.List
 import uk.ac.kcl.mde.awk.awk.Statement
+import uk.ac.kcl.mde.awk.awk.VarReference
+import uk.ac.kcl.mde.awk.awk.IntOption
 
 /** 
  * This class contains custom validation rules. 
@@ -21,6 +23,7 @@ class AwkValidator extends AbstractAwkValidator {
 
 	public static val INVALID_SECTION = 'invalid_section'
 	public static val INVALID_MATCH_PRINT_STATEMENT = 'invalid_match_print_statement'
+	public static val INVALID_MATCH_REFERENCE_TYPE = 'invalid_match_reference_type'
 	
 	 @Check
 	 def checkSectionHeaderNotDuplicate(AwkProgram program) {
@@ -57,4 +60,18 @@ class AwkValidator extends AbstractAwkValidator {
  			}
  		}
 	}
+	
+	@Check
+	def checkMatchVariableReferenceIsString(MatchStatement matchstatement){
+		if(matchstatement.exp instanceof VarReference){
+			val reference = matchstatement.exp as VarReference
+			if(reference.^val.^val instanceof IntOption){
+				error(reference.^val.name + ' points to an Integer, should be a String', matchstatement,
+					matchstatement.eContainer.eContainer.eContainingFeature, INVALID_MATCH_REFERENCE_TYPE)
+			}
+		}
+	}
 }
+
+
+
