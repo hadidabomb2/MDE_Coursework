@@ -4,12 +4,11 @@ start{
 }
 body{
 	var columnCount = 10;
-	match "cheese";
-	print "cheese";
+	match "test";
 	row {
-		"cheese", " | ";
-		"test", " | ";
+		"test2", " | ";
 	}
+	print rowCount;
 }
 end{
 	var max = 2;

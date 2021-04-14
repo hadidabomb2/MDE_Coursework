@@ -13,11 +13,19 @@ import uk.ac.kcl.mde.awk.awk.Section
 import uk.ac.kcl.mde.awk.awk.AwkProgram
 import uk.ac.kcl.mde.awk.awk.SectionHeader
 import uk.ac.kcl.mde.awk.awk.Statement
+import uk.ac.kcl.mde.awk.awk.impl.RowStatementImpl
+import uk.ac.kcl.mde.awk.awk.RowStatement
 
 class AwkScopeProvider extends AbstractDeclarativeScopeProvider {
 	override IScope getScope(EObject context, EReference reference) {
 		if (context instanceof VarReference && reference == AwkPackage.Literals.VAR_REFERENCE__VAL) {
-			var Section sectionBlock = context.eContainer.eContainer as Section
+			var Section sectionBlock;
+			if (context.eContainer.eContainer instanceof RowStatement) {
+				sectionBlock = context.eContainer.eContainer.eContainer as Section
+			} else {
+				sectionBlock = context.eContainer.eContainer as Section
+			}
+			
 			if (sectionBlock.section.equals(SectionHeader.START)){
 				return Scopes.scopeFor(sectionBlock.statements)
 			}

@@ -45,12 +45,12 @@ class AwkValidator extends AbstractAwkValidator {
 	 	for(i : 0 ..< (section.statements.size)){
 	 		if (section.statements.get(i).eClass.name == "MatchStatement") {
 	 			if(i == section.statements.size - 1){
-					warning('There should be a print statement after a match statement', section,
+					warning('There should be a print or row statement after a match statement', section,
 						section.eContainer.eContainingFeature, INVALID_MATCH_PRINT_STATEMENT)
 	 			}
-	 			else{
-		 			if (section.statements.get(i + 1).eClass.name !== "PrintStatement") {
-						warning('There should be a print statement after a match statement', section,
+	 			else {
+		 			if ((section.statements.get(i + 1).eClass.name !== "PrintStatement") && (section.statements.get(i + 1).eClass.name !== "RowStatement")) {
+						warning('There should be a print or row statement after a match statement', section,
 							section.eContainer.eContainingFeature, INVALID_MATCH_PRINT_STATEMENT)
 					}
 				}
