@@ -1,0 +1,16 @@
+/* XPECT_SETUP uk.ac.kcl.mde.awk.xpect.XPectTests END_SETUP */
+
+Filename("Trees123")
+start{
+	var rowCount = 5;
+}
+body{
+	var columnCount = 10;
+}
+end{
+	var max = 2;
+	match columnCount;
+	print 2;
+	var max = 2;
+}
+	

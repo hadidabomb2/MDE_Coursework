@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: uk.ac.kcl.mde.awk
+Bundle-ManifestVersion: 2
+Bundle-Name: uk.ac.kcl.mde.awk
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: uk.ac.kcl.mde.awk; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xsemantics.runtime;bundle-version="1.19.0",
+ org.eclipse.epsilon.emc.emf;bundle-version="1.6.0",
+ org.eclipse.epsilon.etl.engine;bundle-version="1.6.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: uk.ac.kcl.mde.awk.validation,
+ uk.ac.kcl.mde.awk.services,
+ uk.ac.kcl.mde.awk,
+ uk.ac.kcl.mde.awk.awk.impl,
+ uk.ac.kcl.mde.awk.parser.antlr.internal,
+ uk.ac.kcl.mde.awk.scoping,
+ uk.ac.kcl.mde.awk.generator,
+ uk.ac.kcl.mde.awk.awk,
+ uk.ac.kcl.mde.awk.serializer,
+ uk.ac.kcl.mde.awk.awk.util,
+ uk.ac.kcl.mde.awk.parser.antlr
+Import-Package: org.apache.log4j
