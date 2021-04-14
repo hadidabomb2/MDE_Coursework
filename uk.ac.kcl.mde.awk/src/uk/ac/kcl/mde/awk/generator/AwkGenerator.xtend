@@ -66,19 +66,25 @@ class AwkGenerator extends AbstractGenerator {
 	
 	dispatch def generateAwkCommand(Statement stmt) ''''''
 	dispatch def generateAwkCommand(MatchStatement stmt) '''/«stmt.exp.generateAwkMatchExp»/'''
-	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
+//	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
 	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.option.generateAwkPrintColumns»}'''
 	dispatch def generateAwkCommand(RowStatement stmt) '''{print «stmt.statements.map[generateAwkColStatement].join(' ')»}'''
 	
 	dispatch def generateAwkMatchExp(MatchDeclaration decl) ''''''
 	dispatch def generateAwkMatchExp(StringOption decl) '''«decl.^val»'''
-	dispatch def generateAwkMatchExp(VarReference decl) '''«decl.^val.generateAwkVarDeclaration»'''
+	dispatch def generateAwkMatchExp(VarReference decl) '''«decl.^val.generateAwkMatchVarDeclaration»'''
 	
 	dispatch def generateAwkVariableOptions(VariableOptions decl) ''''''
 	dispatch def generateAwkVariableOptions(StringOption decl) '''"«decl.^val»"'''
 	dispatch def generateAwkVariableOptions(IntOption decl) '''«decl.^val»'''
 	
+	dispatch def generateAwkMatchVariableOptions(VariableOptions decl) ''''''
+	dispatch def generateAwkMatchVariableOptions(StringOption decl) '''«decl.^val»'''
+	dispatch def generateAwkMatchVariableOptions(IntOption decl) '''«decl.^val»'''
+	
 	def generateAwkVarDeclaration(VariableDeclaration opt) '''«opt.^val.generateAwkVariableOptions»'''
+	
+	def generateAwkMatchVarDeclaration(VariableDeclaration opt) '''«opt.^val.generateAwkMatchVariableOptions»'''
 	
 	def generateAwkColStatement(ColStatement stmt) '''«stmt.col.generateAwkPrintColumns» "«stmt.divider»"'''
 	

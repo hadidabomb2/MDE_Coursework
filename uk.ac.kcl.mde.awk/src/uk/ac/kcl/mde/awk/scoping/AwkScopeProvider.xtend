@@ -33,7 +33,13 @@ class AwkScopeProvider extends AbstractDeclarativeScopeProvider {
 				var AwkProgram awkProgram = sectionBlock.eContainer as AwkProgram
 				var startSectionBlock = awkProgram.sections.filter[x | x.section == SectionHeader.START].head as Section
 				var bodySectionBlock = awkProgram.sections.filter[x | x.section == SectionHeader.BODY].head as Section
-				return Scopes.scopeFor(startSectionBlock.statements + bodySectionBlock.statements)
+				if ((startSectionBlock !== null) && (bodySectionBlock !== null)) {
+					return Scopes.scopeFor(startSectionBlock.statements + bodySectionBlock.statements)	
+				} else if (startSectionBlock !== null) {
+					return Scopes.scopeFor(startSectionBlock.statements)
+				} else { //bodySectionBlock !== null
+					return Scopes.scopeFor(bodySectionBlock.statements)
+				}
 			}
 			else{
 				var AwkProgram awkProgram = sectionBlock.eContainer as AwkProgram

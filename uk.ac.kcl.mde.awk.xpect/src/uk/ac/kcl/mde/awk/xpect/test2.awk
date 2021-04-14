@@ -1,19 +1,22 @@
-filename("test.txt")
-start{
-	var rowCount = 5;
-}
-body{
-	var columnCount = 10;
-	match "test";
+filename("processes.txt")
+start {
 	row {
-		"test2", " | ";
+		"Process ID", " | ";
+		"CPU Usage", " | ";
+		"Date/Time Started", " | ";
 	}
-	print rowCount;
-}
-end{
-	var max = 2;
-	print columnCount;
 }
 
-
-	
+body {
+	var application = "Spotify";
+	match application;
+	row {
+		column 2, " | ";
+		column 3, " | ";
+		column 9, " | ";
+	}
+}
+end {
+	print "Application Information For:";
+	print application;
+}
