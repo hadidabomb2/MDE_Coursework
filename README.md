@@ -9,3 +9,4 @@ A model for the AWK programming language. AWK is commonly paired with GAWK, whic
 * Right-click on the main 'uk.ac.kcl.mde.awk' project. Hover over 'Run As' option and click on 'Eclipse Application'.
 * Import the xpect project in the application that opens.
 * Test and learn using the xpect project or create your own .awk files!
+  * To run the tests: right-click on the main 'uk.ac.kcl.mde.awk.xpect' package located in the src folder of the 'uk.ac.kcl.mde.awk.xpect' project. Hover over 'Run As' and click on 'JUnit Test'.
