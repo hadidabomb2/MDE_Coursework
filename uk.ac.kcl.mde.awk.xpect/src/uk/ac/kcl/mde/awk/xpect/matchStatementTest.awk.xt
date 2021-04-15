@@ -1,0 +1,21 @@
+/* XPECT_SETUP uk.ac.kcl.mde.awk.xpect.XPectTests END_SETUP */
+
+filename("Trees123")
+start{
+	var rowCount = 5;
+	// XPECT errors --> "rowCount points to an Integer, should be a String" at "match rowCount;"
+	match rowCount;
+	print "Test";
+}
+// XPECT warnings --> "There should be a print or row statement after a match statement" at "body{ 	match "Test"; 	var columnCount = "AS"; 	 }"
+body{
+	match "Test";
+	var columnCount = "AS";
+}
+end{
+	var max = 2;
+	match columnCount;
+	print 2;
+	var max = 2;
+}
+	

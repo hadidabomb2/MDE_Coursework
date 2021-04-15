@@ -1,0 +1,24 @@
+/* XPECT_SETUP uk.ac.kcl.mde.awk.xpect.XPectTests END_SETUP */
+
+/*
+XPECT generated file program.txt ---
+awk 'BEGIN { {print "Test"}}END { /AS/ {print 2} }' Trees123
+
+---
+*/
+
+filename("Trees123")
+start{
+	var rowCount = 5;
+	print "Test";
+}
+body{
+	var columnCount = "AS";
+}
+end{
+	var max = 2;
+	match columnCount;
+	print 2;
+	var max = 2;
+}
+	

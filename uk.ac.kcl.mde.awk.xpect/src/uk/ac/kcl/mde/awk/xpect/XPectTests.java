@@ -8,7 +8,6 @@ import org.eclipse.xpect.xtext.lib.tests.LinkingTest;
 import org.eclipse.xpect.xtext.lib.tests.ResourceDescriptionTest;
 import org.eclipse.xpect.xtext.lib.tests.ScopingTest;
 import org.eclipse.xpect.xtext.lib.tests.ValidationTest;
-import org.eclipse.xpect.xtext.lib.tests.XtextTests;
 import org.junit.runner.RunWith;
 
 import uk.ac.kcl.mde.awk.generator.AwkGenerator;
@@ -18,6 +17,7 @@ import uk.ac.kcl.mde.awk.generator.AwkGenerator;
 	ResourceDescriptionTest.class, //
 	ScopingTest.class, //
 	ValidationTest.class,  //
+	GeneratorTest.class
 })
 @RunWith(XpectRunner.class)
 public class XPectTests extends AwkGenerator {

@@ -1,0 +1,22 @@
+/* XPECT_SETUP uk.ac.kcl.mde.awk.xpect.XPectTests END_SETUP */
+
+
+// XPECT errors --> "There must not be two end headers" at "filename("Trees123") start{ 	var rowCount = 5; 	print "Test"; } body{ 	var columnCount = "AS"; } end{ 	var max = 2; 	match columnCount; 	print 2; 	var max = 2; } end{ 	 }"
+filename("Trees123")
+start{
+	var rowCount = 5;
+	print "Test";
+}
+body{
+	var columnCount = "AS";
+}
+end{
+	var max = 2;
+	match columnCount;
+	print 2;
+	var max = 2;
+}
+end{
+	
+}
+	

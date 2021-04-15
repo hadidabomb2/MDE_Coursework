@@ -1,0 +1,22 @@
+/* XPECT_SETUP uk.ac.kcl.mde.awk.xpect.XPectTests END_SETUP */
+
+filename("Trees123")
+start{
+	var rowCount = 5;
+	// XPECT errors -->  "Couldn't resolve reference to VariableDeclaration 'columnCount'." at "columnCount"
+	print columnCount;
+	print "Test";
+}
+body{
+	print rowCount;
+	// XPECT errors --> "Couldn't resolve reference to VariableDeclaration 'max'." at "max"
+	print max;
+	var columnCount = "AS";
+}
+end{
+	var max = 2;
+	match columnCount;
+	print 2;
+	var max = 2;
+}
+	

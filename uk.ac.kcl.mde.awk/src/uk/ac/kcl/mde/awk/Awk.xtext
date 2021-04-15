@@ -24,8 +24,8 @@ Filename:
 ;
 
 Statement:
-	MatchStatement |
 	VariableDeclaration |
+	MatchStatement |
 	PrintStatement |
 	RowStatement
 ;
