@@ -66,7 +66,6 @@ class AwkGenerator extends AbstractGenerator {
 	
 	dispatch def generateAwkCommand(Statement stmt) ''''''
 	dispatch def generateAwkCommand(MatchStatement stmt) '''/«stmt.exp.generateAwkMatchExp»/'''
-//	dispatch def generateAwkCommand(VariableDeclaration stmt) '''«stmt.name» = «stmt.^val.generateAwkVariableOptions»;'''
 	dispatch def generateAwkCommand(PrintStatement stmt) '''{print «stmt.option.generateAwkPrintColumns»}'''
 	dispatch def generateAwkCommand(RowStatement stmt) '''{print «stmt.statements.map[generateAwkColStatement].join(' ')»}'''
 	
