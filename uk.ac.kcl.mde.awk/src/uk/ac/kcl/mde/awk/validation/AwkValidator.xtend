@@ -4,16 +4,12 @@
 package uk.ac.kcl.mde.awk.validation
 
 import org.eclipse.xtext.validation.Check
-import uk.ac.kcl.mde.awk.awk.AwkPackage
 import uk.ac.kcl.mde.awk.awk.AwkProgram
-import uk.ac.kcl.mde.awk.awk.SectionHeader
-import uk.ac.kcl.mde.awk.awk.Section
-import uk.ac.kcl.mde.awk.awk.MatchStatement
-import uk.ac.kcl.mde.awk.awk.impl.MatchStatementImpl
-import java.util.List
-import uk.ac.kcl.mde.awk.awk.Statement
-import uk.ac.kcl.mde.awk.awk.VarReference
 import uk.ac.kcl.mde.awk.awk.IntOption
+import uk.ac.kcl.mde.awk.awk.MatchStatement
+import uk.ac.kcl.mde.awk.awk.Section
+import uk.ac.kcl.mde.awk.awk.SectionHeader
+import uk.ac.kcl.mde.awk.awk.VarReference
 
 /** 
  * This class contains custom validation rules. 

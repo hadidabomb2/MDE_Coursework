@@ -1,20 +1,16 @@
 package uk.ac.kcl.mde.awk.scoping
 
-import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import uk.ac.kcl.mde.awk.awk.AwkPackage
-import uk.ac.kcl.mde.awk.awk.VarReference
-import uk.ac.kcl.mde.awk.awk.Section
 import uk.ac.kcl.mde.awk.awk.AwkProgram
-import uk.ac.kcl.mde.awk.awk.SectionHeader
-import uk.ac.kcl.mde.awk.awk.Statement
-import uk.ac.kcl.mde.awk.awk.impl.RowStatementImpl
 import uk.ac.kcl.mde.awk.awk.RowStatement
+import uk.ac.kcl.mde.awk.awk.Section
+import uk.ac.kcl.mde.awk.awk.SectionHeader
+import uk.ac.kcl.mde.awk.awk.VarReference
 
 class AwkScopeProvider extends AbstractDeclarativeScopeProvider {
 	override IScope getScope(EObject context, EReference reference) {
